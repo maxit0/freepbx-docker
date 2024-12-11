@@ -20,7 +20,7 @@ jobs:
 
     - name: Deploy to Server
       run: |
-        ssh -o StrictHostKeyChecking=no user@<IP_SERVIDOR> "
+        ssh -o StrictHostKeyChecking=no root@192.168.10.10 "
           cd /srv/agile/freepbx &&
           git pull origin main &&
           docker stack deploy -c docker-compose.yml agile-freepbx
