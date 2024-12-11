@@ -1,0 +1,27 @@
+name: Deploy to Docker Swarm
+
+on:
+  push:
+    branches:
+      - main # Cambia "main" por la rama que quieras desplegar
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Deploy to Server
+      run: |
+        ssh -o StrictHostKeyChecking=no user@<IP_SERVIDOR> "
+          cd /srv/agile/freepbx &&
+          git pull origin main &&
+          docker stack deploy -c docker-compose.yml agile-freepbx
+        "
