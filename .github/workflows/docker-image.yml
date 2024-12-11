@@ -3,7 +3,7 @@ name: Deploy to Docker Swarm
 on:
   push:
     branches:
-      - main # Cambia "main" por la rama que quieras desplegar
+      - main 
 
 jobs:
   deploy:
